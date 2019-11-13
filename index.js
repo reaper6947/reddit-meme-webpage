@@ -16,21 +16,21 @@ app.set('view engine', 'ejs');
   };
 
   const memes = {
-    Pages: 6,
+    Pages: 5,
     Records: 25,
     SubReddit: "memes",
     SortType: "top",
   };
 
   const dankMemes = {
-    Pages: 6,
+    Pages: 5,
     Records: 25,
     SubReddit: "dankmemes",
     SortType: "top",
   };
 
   const deepFriedMemes = {
-    Pages: 6,
+    Pages: 5,
     Records: 25,
     SubReddit: "deepfriedmemes",
     SortType: "top",

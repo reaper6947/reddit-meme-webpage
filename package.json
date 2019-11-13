@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "a simple site that scrapes memes from reddit and displays it without anything but memes",
   "main": "index.js",
+   "node": "v10.16.3",
   "scripts": {
     "start" : "node index.js"
   },

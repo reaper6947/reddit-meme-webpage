@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>meme</title>
+  <link rel="stylesheet" href="/master.css">
+  <style media="screen">
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin-bottom:10;
+      margin-top: 10;
+      border: solid 2px ;
+      padding:0;
+    }
+    h1 {
+      margin: auto;
+      display: block;
+      align: center;
+    }
+  </style>
+<body>
+  <div align='center' padding="0" margin='0'>
+    <h1>welcome to my meme website </h1>
+    <% for ( var i = 0 ; i < url.length; i++) {  %>
+    <img src="<%-url[i]%>"   alt="">
+    <% ; } %>
+  </div>
+</body>
+
+</html>

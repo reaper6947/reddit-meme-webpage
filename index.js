@@ -1,12 +1,10 @@
 //jshint esversion:8
 const RedditScraper = require("reddit-scraper");
-const cheerio = require('cheerio');
 const url = require('url');
 const express = require("express");
 const app = express();
 
 app.set('view engine', 'ejs');
-
 
 (async () => {
 
@@ -15,24 +13,39 @@ app.set('view engine', 'ejs');
     AppSecret: "ZcS65djwnC5nT_GmlH4PbPD8SsI",
   };
 
+  /*  const meme = {
+      Pages: 6,
+      Records: 25,
+      SubReddit: "meme",
+      SortType: "top",
+    };
+  */
+
   const memes = {
-    Pages: 6,
+    Pages: 7,
     Records: 25,
     SubReddit: "memes",
     SortType: "top",
   };
 
-  const dankMemes = {
-    Pages: 6,
+  const dank_Meme = {
+    Pages: 7,
     Records: 25,
-    SubReddit: "dankmemes",
+    SubReddit: "dank_meme",
     SortType: "top",
   };
 
   const deepFriedMemes = {
-    Pages: 6,
+    Pages: 7,
     Records: 25,
     SubReddit: "deepfriedmemes",
+    SortType: "top",
+  };
+
+  const memeEconomy = {
+    Pages: 7,
+    Records: 25,
+    SubReddit: "MemeEconomy",
     SortType: "top",
   };
 
@@ -40,14 +53,19 @@ app.set('view engine', 'ejs');
     const redditScraper = new RedditScraper.RedditScraper(redditScraperOptions);
     console.log("Configuration Loaded!");
 
+  /*  var memeData = await redditScraper.scrapeData(meme);
+    console.log("Meme Subreddit Scraped!");
+  */
     var memesData = await redditScraper.scrapeData(memes);
     console.log("Memes Subreddit Scraped!");
-    var dankMemesData = await redditScraper.scrapeData(dankMemes);
-    console.log("DankMemes Subreddit Scraped!");
+    var dank_MemesData = await redditScraper.scrapeData(dank_Meme);
+    console.log("Dank_Memes Subreddit Scraped!");
     var deepFriedMemesData = await redditScraper.scrapeData(deepFriedMemes);
     console.log("DeepFriedMemes Subreddit Scraped!");
+    var memeEconomyData = await redditScraper.scrapeData(memeEconomy);
+    console.log("MemeEconomy Subreddit Scraped!");
 
-    const scrapedData = [].concat.apply([], [memesData, /*memeData,*/ dankMemesData, deepFriedMemesData]);
+    const scrapedData = [].concat.apply([], [/*memeData,*/ memesData,dank_MemesData,deepFriedMemesData,memeEconomyData ]);
     var memeCount = 0;
     var skipCount = 0;
     var invalidCount = 0;

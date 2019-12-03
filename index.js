@@ -24,28 +24,28 @@ cron.schedule('* * /6 * * *', function(){
   */
 
   const memes = {
-    Pages: 1,
+    Pages: 6,
     Records: 25,
     SubReddit: "memes",
     SortType: "top",
   };
 
   const dank_Meme = {
-    Pages: 1,
+    Pages: 6,
     Records: 25,
     SubReddit: "dank_meme",
     SortType: "top",
   };
 
   const deepFriedMemes = {
-    Pages: 1,
+    Pages: 6,
     Records: 25,
     SubReddit: "deepfriedmemes",
     SortType: "top",
   };
 
   const memeEconomy = {
-    Pages: 1,
+    Pages: 6,
     Records: 25,
     SubReddit: "MemeEconomy",
     SortType: "top",

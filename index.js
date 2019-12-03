@@ -7,7 +7,7 @@ const cron = require('node-cron');
 app.set('view engine', 'ejs');
 
 
-cron.schedule('* * /6 * * *', function(){
+//cron.schedule('* * /6 * * *', function(){
 (async () => {
 
   const redditScraperOptions = {
@@ -92,4 +92,4 @@ var port = process.env.PORT || 5000;
   });
 
 })();
-});
+//  });

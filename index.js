@@ -3,9 +3,11 @@ const RedditScraper = require("reddit-scraper");
 const url = require('url');
 const express = require("express");
 const app = express();
-
+const cron = require('node-cron');
 app.set('view engine', 'ejs');
 
+
+cron.schedule('* * /6 * * *', function(){
 (async () => {
 
   const redditScraperOptions = {
@@ -22,28 +24,28 @@ app.set('view engine', 'ejs');
   */
 
   const memes = {
-    Pages: 7,
+    Pages: 1,
     Records: 25,
     SubReddit: "memes",
     SortType: "top",
   };
 
   const dank_Meme = {
-    Pages: 7,
+    Pages: 1,
     Records: 25,
     SubReddit: "dank_meme",
     SortType: "top",
   };
 
   const deepFriedMemes = {
-    Pages: 7,
+    Pages: 1,
     Records: 25,
     SubReddit: "deepfriedmemes",
     SortType: "top",
   };
 
   const memeEconomy = {
-    Pages: 7,
+    Pages: 1,
     Records: 25,
     SubReddit: "MemeEconomy",
     SortType: "top",
@@ -74,7 +76,6 @@ app.set('view engine', 'ejs');
        url.push(scrapedData[i].data.url);
       console.log(url);
     }
-
     console.log(scrapedData.length + " total memes fetched.");
 
   } catch (error) {
@@ -91,3 +92,4 @@ var port = process.env.PORT || 5000;
   });
 
 })();
+});

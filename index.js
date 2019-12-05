@@ -12,12 +12,13 @@ const pageNum = 6 ;
 const memeType = "top" ;
 
 
-
 app.set('view engine', 'ejs');
 (async () => {
   const redditScraperOptions = {
+
     AppId: apiId ,                           // enter the id here
     AppSecret: apiKey,                      // enter the secret here
+
   };
 
   /*  const meme = {

@@ -3,15 +3,21 @@ const RedditScraper = require("reddit-scraper");
 const url = require('url');
 const express = require("express");
 const app = express();
-app.set('view engine', 'ejs');
+const dotenv = require('dotenv').config();  //this is fro hiding secret in .env file
+const apiId = process.env.API_ID;
+const apiKey = process.env.API_KEY;
+
 
 const pageNum = 6 ;
 const memeType = "top" ;
 
+
+
+app.set('view engine', 'ejs');
 (async () => {
   const redditScraperOptions = {
-    AppId: "YZwduUlkpuIkJw",
-    AppSecret: "ZcS65djwnC5nT_GmlH4PbPD8SsI",
+    AppId: apiId ,                           // enter the id here
+    AppSecret: apiKey,                      // enter the secret here
   };
 
   /*  const meme = {

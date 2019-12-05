@@ -3,13 +3,12 @@ const RedditScraper = require("reddit-scraper");
 const url = require('url');
 const express = require("express");
 const app = express();
-const cron = require('node-cron');
 app.set('view engine', 'ejs');
 
+const pageNum = 6 ;
+const memeType = "top" ;
 
-//cron.schedule('* * /6 * * *', function(){
 (async () => {
-
   const redditScraperOptions = {
     AppId: "YZwduUlkpuIkJw",
     AppSecret: "ZcS65djwnC5nT_GmlH4PbPD8SsI",
@@ -24,34 +23,35 @@ app.set('view engine', 'ejs');
   */
 
   const memes = {
-    Pages: 6,
+    Pages: pageNum,
     Records: 25,
     SubReddit: "memes",
-    SortType: "top",
+    SortType: memeType,
   };
 
   const dank_Meme = {
-    Pages: 6,
+    Pages: pageNum,
     Records: 25,
     SubReddit: "dank_meme",
-    SortType: "top",
+    SortType: memeType,
   };
 
   const deepFriedMemes = {
-    Pages: 6,
+    Pages: pageNum,
     Records: 25,
     SubReddit: "deepfriedmemes",
-    SortType: "top",
+    SortType: memeType,
   };
 
   const memeEconomy = {
-    Pages: 6,
+    Pages: pageNum,
     Records: 25,
     SubReddit: "MemeEconomy",
-    SortType: "top",
+    SortType: memeType,
   };
 
-  try {
+  try
+  {
     const redditScraper = new RedditScraper.RedditScraper(redditScraperOptions);
     console.log("Configuration Loaded!");
 
@@ -71,25 +71,30 @@ app.set('view engine', 'ejs');
     var memeCount = 0;
     var skipCount = 0;
     var invalidCount = 0;
-    var url = [] ;
-    for (i = 0; i < scrapedData.length; i++) {
-       url.push(scrapedData[i].data.url);
-      console.log(url);
+    var urls = [] ;
+    for (i = 0; i < scrapedData.length; i++)
+    {
+       urls.push(scrapedData[i].data.url);
+      console.log(urls);
     }
     console.log(scrapedData.length + " total memes fetched.");
-
   } catch (error) {
     console.error(error);
   }
   app.get("/", function(req, res) {
     res.render("index", {
-      url: url
+      url: urls
     });
   });
+
+  app.get("/apis", (req, res) => {
+  res.json(
+    urls
+  );
+  });
+
 var port = process.env.PORT || 5000;
   app.listen(port, function() {
     console.log("server has started in 5000");
   });
-
 })();
-//  });

@@ -59,11 +59,11 @@ app.set('view engine', 'ejs');
     var memeCount = 0;
     var skipCount = 0;
     var invalidCount = 0;
-    var urls = [] ;
+    var url = [] ;
     for ( var i = 0; i < scrapedData.length; i++)
     {
-       urls.push(scrapedData[i].data.url);
-      console.log(urls);
+       url.push(scrapedData[i].data.url);
+      console.log(url);
     }
     console.log(scrapedData.length + " total memes fetched.");
   } catch (error) {
@@ -71,13 +71,13 @@ app.set('view engine', 'ejs');
   }
   app.get("/", function(req, res) {
     res.render("index", {
-      url: urls
+      url: url
     });
   });
 
   app.get("/apis", (req, res) => {
   res.json(
-    urls
+    url
   );
   });
 

@@ -12,11 +12,11 @@ app.set('view engine', 'ejs');
   const redditScraperOptions = {
 
     AppId: process.env.API_ID ,                           // enter the id here
-    AppSecret: process.env.API_KEY,                      // enter the secret here
+    AppSecret: process.env.API_KEY                     // enter the secret here
 
   };
 
-  const pgNum = 1 ;
+  const pgNum = 6 ;
   const sortType = "top" ;
   const recordNum = 25;
 

@@ -8,8 +8,6 @@ const apiId = process.env.API_ID;
 const apiKey = process.env.API_KEY;
 
 
-const pageNum = 6 ;
-const memeType = "top" ;
 
 
 app.set('view engine', 'ejs');
@@ -21,41 +19,24 @@ app.set('view engine', 'ejs');
 
   };
 
-  /*  const meme = {
-      Pages: 6,
-      Records: 25,
-      SubReddit: "meme",
-      SortType: "top",
-    };
-  */
+  const pgNum = 1 ;
+  const sortType = "top" ;
+  const recordNum = 25;
 
-  const memes = {
-    Pages: pageNum,
-    Records: 25,
-    SubReddit: "memes",
-    SortType: memeType,
-  };
-
-  const dank_Meme = {
-    Pages: pageNum,
-    Records: 25,
-    SubReddit: "dank_meme",
-    SortType: memeType,
-  };
-
-  const deepFriedMemes = {
-    Pages: pageNum,
-    Records: 25,
-    SubReddit: "deepfriedmemes",
-    SortType: memeType,
-  };
-
-  const memeEconomy = {
-    Pages: pageNum,
-    Records: 25,
-    SubReddit: "MemeEconomy",
-    SortType: memeType,
-  };
+    class Memeobj
+   {
+    constructor(Pages,Records,SubReddit,SortType,)
+     {
+      this.Pages = Pages ;
+      this.Records = Records;
+      this.SortType = SortType;
+      this.SubReddit = SubReddit;
+     }
+   }
+    const memes          = await new Memeobj(pgNum,recordNum,"memes",sortType);
+    const dank_Meme      = await new Memeobj(pgNum,recordNum,"dank_meme",sortType);
+    const deepFriedMemes = await new Memeobj(pgNum,recordNum,"deepfriedmemes",sortType);
+    const memeEconomy    = await new Memeobj(pgNum,recordNum,"MemeEconomy",sortType);
 
   try
   {
@@ -79,7 +60,7 @@ app.set('view engine', 'ejs');
     var skipCount = 0;
     var invalidCount = 0;
     var urls = [] ;
-    for (i = 0; i < scrapedData.length; i++)
+    for ( var i = 0; i < scrapedData.length; i++)
     {
        urls.push(scrapedData[i].data.url);
       console.log(urls);

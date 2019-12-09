@@ -4,8 +4,8 @@ const url = require('url');
 const express = require("express");
 const app = express();
 const dotenv = require('dotenv').config();  //this is fro hiding secret in .env file
-const apiId = process.env.API_ID;
-const apiKey = process.env.API_KEY;
+var apiId = process.env.API_ID;
+var apiKey = process.env.API_KEY;
 
 
 
@@ -14,8 +14,8 @@ app.set('view engine', 'ejs');
 (async () => {
   const redditScraperOptions = {
 
-    AppId: "YZwduUlkpuIkJw" ,                           // enter the id here
-    AppSecret: "ZcS65djwnC5nT_GmlH4PbPD8SsI",                      // enter the secret here
+    AppId: apiId ,                           // enter the id here
+    AppSecret: apiKey,                      // enter the secret here
 
   };
 

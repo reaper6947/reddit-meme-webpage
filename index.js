@@ -14,8 +14,8 @@ app.set('view engine', 'ejs');
 (async () => {
   const redditScraperOptions = {
 
-    AppId: apiId ,                           // enter the id here
-    AppSecret: apiKey,                      // enter the secret here
+    AppId: "YZwduUlkpuIkJw" ,                           // enter the id here
+    AppSecret: "ZcS65djwnC5nT_GmlH4PbPD8SsI",                      // enter the secret here
 
   };
 

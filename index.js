@@ -16,8 +16,6 @@ app.set('view engine', 'ejs');
 
   };
 
-
-
     class Memeobj
    {
     constructor(SubReddit)
@@ -29,13 +27,6 @@ app.set('view engine', 'ejs');
       this.Info = null;
       this.urls = [];
      }
-
-
-
-
-
-
-
    }
     const memes          = await new Memeobj("memes");
     const dank_Meme      = await new Memeobj("dank_meme");

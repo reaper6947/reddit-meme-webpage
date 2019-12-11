@@ -64,7 +64,7 @@ app.set('view engine', 'ejs');
     var memesData          = await scrapedata(memes,redditScraper);
     console.log("Memes Subreddit Scraped!");
 
-    var dank_MemeData      = await scrapedata(dank_Meme,redditScraper);
+    var dank_MemesData      = await scrapedata(dank_Meme,redditScraper);
     console.log("Dank_Memes Subreddit Scraped!");
 
     var deepFriedMemesData = await scrapedata(deepFriedMemes,redditScraper);
@@ -78,6 +78,7 @@ app.set('view engine', 'ejs');
   } catch (error) {
     console.error(error);
   }
+
   app.get("/", function(req, res) {
     res.render("index", {
       url: scrapedData

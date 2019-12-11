@@ -26,6 +26,8 @@ app.set('view engine', 'ejs');
       this.Records = 25;
       this.SortType = "top";
       this.SubReddit = SubReddit;
+      this.Info = null;
+      this.urls = [];
      }
 
 

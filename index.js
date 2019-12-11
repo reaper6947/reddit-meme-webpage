@@ -16,65 +16,75 @@ app.set('view engine', 'ejs');
 
   };
 
-  const pgNum = 6 ;
-  const sortType = "top" ;
-  const recordNum = 25;
+
 
     class Memeobj
    {
-    constructor(Pages,Records,SubReddit,SortType,)
+    constructor(SubReddit)
      {
-      this.Pages = Pages ;
-      this.Records = Records;
-      this.SortType = SortType;
+      this.Pages = 6 ;
+      this.Records = 25;
+      this.SortType = "top";
       this.SubReddit = SubReddit;
      }
+
+
+
+
+
+
+
    }
-    const memes          = await new Memeobj(pgNum,recordNum,"memes",sortType);
-    const dank_Meme      = await new Memeobj(pgNum,recordNum,"dank_meme",sortType);
-    const deepFriedMemes = await new Memeobj(pgNum,recordNum,"deepfriedmemes",sortType);
-    const memeEconomy    = await new Memeobj(pgNum,recordNum,"MemeEconomy",sortType);
+    const memes          = await new Memeobj("memes");
+    const dank_Meme      = await new Memeobj("dank_meme");
+    const deepFriedMemes = await new Memeobj("deepfriedmemes");
+    const memeEconomy    = await new Memeobj("MemeEconomy");
 
   try
   {
     const redditScraper = new RedditScraper.RedditScraper(redditScraperOptions);
     console.log("Configuration Loaded!");
 
-  /*  var memeData = await redditScraper.scrapeData(meme);
-    console.log("Meme Subreddit Scraped!");
-  */
-    var memesData = await redditScraper.scrapeData(memes);
+    let scrapedata = async (obj,redditScraper) =>
+    {
+      try
+      {
+        obj.Info = await redditScraper.scrapeData(obj);
+        obj.urls = await obj.Info.map(obj => obj.data.url);
+        return await obj.urls;
+      }
+      catch(err)
+      {
+        console.log(err);
+      }
+    };
+
+    var memesData          = await scrapedata(memes,redditScraper);
     console.log("Memes Subreddit Scraped!");
-    var dank_MemesData = await redditScraper.scrapeData(dank_Meme);
+
+    var dank_MemeData      = await scrapedata(dank_Meme,redditScraper);
     console.log("Dank_Memes Subreddit Scraped!");
-    var deepFriedMemesData = await redditScraper.scrapeData(deepFriedMemes);
+
+    var deepFriedMemesData = await scrapedata(deepFriedMemes,redditScraper);
     console.log("DeepFriedMemes Subreddit Scraped!");
-    var memeEconomyData = await redditScraper.scrapeData(memeEconomy);
+
+    var memeEconomyData    = await scrapedata(memeEconomy,redditScraper);
     console.log("MemeEconomy Subreddit Scraped!");
 
-    const scrapedData = [].concat.apply([], [/*memeData,*/ memesData,dank_MemesData,deepFriedMemesData,memeEconomyData ]);
-    var memeCount = 0;
-    var skipCount = 0;
-    var invalidCount = 0;
-    var url = [] ;
-    for ( var i = 0; i < scrapedData.length; i++)
-    {
-       url.push(scrapedData[i].data.url);
-      console.log(url);
-    }
+    var scrapedData = [].concat.apply([], [/*memeData,*/ memesData,dank_MemesData,deepFriedMemesData,memeEconomyData ]);
     console.log(scrapedData.length + " total memes fetched.");
   } catch (error) {
     console.error(error);
   }
   app.get("/", function(req, res) {
     res.render("index", {
-      url: url
+      url: scrapedData
     });
   });
 
   app.get("/apis", (req, res) => {
   res.json(
-    url
+    scrapedData
   );
   });
 

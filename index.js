@@ -58,10 +58,10 @@ const scrapedata = async (SubReddit) => {
 
     allMeme.DeepFriedMemes = await scrapedata("DeepFriedMemes");
     console.log("DeepFriedMemes Subreddit Scraped!");
-
+    /*
     allMeme.MemeEconomy = await scrapedata("MemeEconomy");
     console.log("MemeEconomy Subreddit Scraped");
-
+    */
     allMeme.all = [].concat.apply([], [...Object.values(allMeme)]);
     allMeme.home = JSON.stringify(allMeme.all);
     cache.set(rd45sdf, allMeme.home);

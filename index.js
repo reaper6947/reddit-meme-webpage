@@ -5,7 +5,7 @@ const app = express();
 const dotenv = require("dotenv").config(); //this is fro hiding secret in .env file
 const NodeCache = require("node-cache");
 const cache = new NodeCache({
-  stdTTL: 0
+  stdTTL: 300 * 60
 });
 
 

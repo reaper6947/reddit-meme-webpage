@@ -24,7 +24,7 @@ app.set("view engine", "ejs");
       try {
         class Memeobj {
           constructor(SubReddit) {
-            this.Pages = 4;
+            this.Pages = 1;
             this.Records = 25;
             this.SortType = "top";
             this.SubReddit = SubReddit;

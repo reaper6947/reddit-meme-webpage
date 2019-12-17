@@ -1,6 +1,5 @@
 //jshint esversion:8
 const RedditScraper = require("reddit-scraper");
-const url = require("url");
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv").config(); //this is fro hiding secret in .env file
@@ -24,7 +23,7 @@ app.set("view engine", "ejs");
       try {
         class Memeobj {
           constructor(SubReddit) {
-            this.Pages = 1;
+            this.Pages = 4;
             this.Records = 25;
             this.SortType = "top";
             this.SubReddit = SubReddit;

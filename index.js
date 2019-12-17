@@ -8,6 +8,10 @@ const cache = new NodeCache({
   stdTTL: 300 * 60
 });
 
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: true
+}))
 
 var allMeme = new Object();
 const rd45sdf = "site-home-stuff";
@@ -25,7 +29,7 @@ const scrapedata = async (SubReddit) => {
   try {
     class Memeobj {
       constructor(SubReddit) {
-        this.Pages = 4;
+        this.Pages = 1;
         this.Records = 25;
         this.SortType = "top";
         this.SubReddit = SubReddit;
@@ -75,7 +79,41 @@ app.get("/", function (req, res) {
   });
 });
 
+const set = async (req, res, next) => {
+  try {
+    const sub = req.params.id;
+    const Urls = await scrapedata(sub);
+    const urls = JSON.stringify(Urls);
+    console.log(Urls.length);
+    cache.set(sub, urls);
+    return res.render("index", {
+      url: Urls
+    });
+    next();
+  } catch (err) {
+    console.log(err);
+    res.status(500);
+  }
+};
 
+const get = (req, res, next) => {
+  const sub = req.params.id;
+  const content = cache.get(sub);
+  if (content) {
+    return res.render("index", {
+      url: JSON.parse(content)
+    });
+  }
+  return next();
+};
+
+app.get("/img/:id", get, set);
+
+app.post("/", (req, res, next) => {
+  console.log(req.body.id);
+  res.redirect("/img/" + req.body.id);
+  next();
+});
 
 var port = process.env.PORT || 3000;
 app.listen(port, function () {

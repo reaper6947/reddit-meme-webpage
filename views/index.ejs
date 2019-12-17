@@ -8,7 +8,19 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>meme</title>
   <link rel="stylesheet" href="/master.css">
+  <style>
+    img {
+      padding-top: 3%;
+      padding-bottom: 3%;
 
+    }
+
+    .container {
+      padding-right: 5px;
+      padding-left: 5px;
+    }
+  </style>
+</head>
 
 <body class="bg-dark">
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
@@ -27,8 +39,8 @@
           <a class="nav-link" href="https://github.com/reaper6947/reddit-meme-webpage">contribute on github</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="text" placeholder="search any subredit" name="subreddit">
+      <form class="form-inline my-2 my-lg-0" action="/" method="POST">
+        <input class="form-control mr-sm-2" type="text" placeholder="search any subredit" name="id">
         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>

@@ -76,6 +76,7 @@ app.get("/", function (req, res) {
   const home = JSON.parse(cache.get(rd45sdf));
   res.render("index", {
     url: home
+
   });
 });
 
@@ -88,6 +89,8 @@ const set = async (req, res, next) => {
     cache.set(sub, urls);
     return res.render("index", {
       url: Urls
+
+
     });
     next();
   } catch (err) {
@@ -102,6 +105,7 @@ const get = (req, res, next) => {
   if (content) {
     return res.render("index", {
       url: JSON.parse(content)
+
     });
   }
   return next();

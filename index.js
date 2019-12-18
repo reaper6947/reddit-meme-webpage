@@ -41,8 +41,8 @@ const scrapedata = async (SubReddit) => {
     const obj = new Memeobj(SubReddit);
     obj.Info = await redditScraper.scrapeData(obj);
     obj.urls = await obj.Info.map((obj) => obj.data.url);
-
-    return obj.urls;
+    var imgUrl = obj.urls.filter(name => name.includes('.jpg') || name.includes('.png') || name.includes('.jpeg') || name.includes('.gif'));
+    return imgUrl;
   } catch (err) {
     console.log(err);
   }

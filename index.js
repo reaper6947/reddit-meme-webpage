@@ -13,6 +13,8 @@ app.use(express.urlencoded({
   extended: true
 }))
 
+app.use(express.static(__dirname + '/public'))
+
 var allMeme = new Object();
 const rd45sdf = "site-home-stuff";
 app.set("view engine", "ejs");

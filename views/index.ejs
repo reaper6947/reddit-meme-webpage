@@ -2,18 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142476193-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-142476193-3');
-  </script>
 
 
   <meta charset="utf-8">
@@ -21,12 +10,11 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <title>meme</title>
-  <link rel="stylesheet" href="/public/master.css">
+  <link rel="stylesheet" type="text/css" href="/public/master.css">
   <style>
     img {
       padding-top: 3%;
       padding-bottom: 3%;
-
     }
 
     .container {
@@ -63,12 +51,29 @@
 
   <div class="container text-center bg-dark " style="padding:5px!important">
     <% for ( var i = 0 ; i < url.length; i++) {  %>
-
-    <img class=" text-center rounded img-fluid img-thumbnail border border-primary" src="<%-url[i]%>" alt="memes">
-
+    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="placeholder.png"
+      data-src="<%-url[i]%>" alt="memes">
     <% ; } %>
   </div>
-
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const imageObserver = new IntersectionObserver((entries, imgObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const lazyImage = entry.target
+            console.log("lazy loading ", lazyImage);
+            lazyImage.src = lazyImage.dataset.src;
+            lazyImage.classList.remove("lzy_img");
+            imgObserver.unobserve(lazyImage);
+          }
+        });
+      });
+      const arr = document.querySelectorAll('img.lzy_img');
+      arr.forEach((v) => {
+        imageObserver.observe(v);
+      });
+    });
+  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>
@@ -77,6 +82,17 @@
   </script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142476193-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', 'UA-142476193-3');
   </script>
 </body>
 

@@ -13,7 +13,7 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-app.use(express.static(__dirname + '/public'))
+// app.use(express.static(__dirname + '/public'))
 
 var allMeme = new Object();
 const rd45sdf = "site-home-stuff";
@@ -31,7 +31,7 @@ const scrapedata = async (SubReddit) => {
   try {
     class Memeobj {
       constructor(SubReddit) {
-        this.Pages = 6;
+        this.Pages = 5;
         this.Records = 25;
         this.SortType = "top";
         this.SubReddit = SubReddit;
@@ -94,11 +94,11 @@ const set = async (req, res, next) => {
 
 
     });
-    next();
   } catch (err) {
     console.log(err);
     res.status(500);
   }
+  next();
 };
 
 const get = (req, res, next) => {

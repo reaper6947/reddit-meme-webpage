@@ -104,8 +104,9 @@ const home = async (req, res, next) => {
 
 
 
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   res.redirect("/img/memes")
+  next()
 });
 
 const set = async (req, res, next) => {

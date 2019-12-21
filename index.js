@@ -5,7 +5,7 @@ const app = express();
 const dotenv = require("dotenv").config(); //this is fro hiding secret in .env file
 const NodeCache = require("node-cache");
 const cache = new NodeCache({
-  stdTTL: 300 * 60
+  stdTTL: 46400
 });
 
 app.use(express.json());
@@ -58,16 +58,16 @@ const scrapedata = async (SubReddit) => {
   try {
     allMeme.memes = await scrapedata("memes");
     console.log("Memes Subreddit Scraped!");
-
-    allMeme.dankmemes = await scrapedata("dankmemes");
-    console.log("Dank_Memes Subreddit Scraped!");
-
-    allMeme.DeepFriedMemes = await scrapedata("DeepFriedMemes");
-    console.log("DeepFriedMemes Subreddit Scraped!");
     /*
-    allMeme.MemeEconomy = await scrapedata("MemeEconomy");
-    console.log("MemeEconomy Subreddit Scraped");
-    */
+     allMeme.dankmemes = await scrapedata("dankmemes");
+     console.log("Dank_Memes Subreddit Scraped!");
+
+     allMeme.DeepFriedMemes = await scrapedata("DeepFriedMemes");
+     console.log("DeepFriedMemes Subreddit Scraped!");
+     
+     allMeme.MemeEconomy = await scrapedata("MemeEconomy");
+     console.log("MemeEconomy Subreddit Scraped");
+     */
     allMeme.all = [].concat.apply([], [...Object.values(allMeme)]);
     allMeme.home = JSON.stringify(allMeme.all);
     cache.set(rd45sdf, allMeme.home);

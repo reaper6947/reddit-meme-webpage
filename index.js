@@ -15,7 +15,7 @@ app.use(express.urlencoded({
 
 app.use((req, res, next) => {
   res.set('Cache-Control', 'public,max-age=31600');
-  next();
+
 });
 // app.use(express.static(__dirname + '/public'))
 

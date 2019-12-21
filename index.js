@@ -15,7 +15,7 @@ app.use(express.urlencoded({
 
 app.use((req, res, next) => {
   res.set('Cache-Control', 'public,max-age=31600');
-  next()
+  next();
 })
 // app.use(express.static(__dirname + '/public'))
 
@@ -84,14 +84,14 @@ app.get("/", async (req, res) => {
     return res.render("index", {
       url: home
     });
-  } else {
-    allMeme.memes = await scrapedata("memes");
-    console.log("Memes Subreddit Scraped!");
-    cache.set("memes", allMeme.memes);
-    return res.render("index", {
-      url: allMeme.memes
-    });
   }
+  allMeme.memes = await scrapedata("memes");
+  console.log("Memes Subreddit Scraped!");
+  cache.set("memes", allMeme.memes);
+  res.render("index", {
+    url: allMeme.memes
+  });
+
 });
 
 const set = async (req, res, next) => {

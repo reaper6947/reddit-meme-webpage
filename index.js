@@ -5,7 +5,7 @@ const app = express();
 const dotenv = require("dotenv").config(); //this is fro hiding secret in .env file
 const NodeCache = require("node-cache");
 const cache = new NodeCache({
-  stdTTL: 46400
+  stdTTL: 31600
 });
 
 app.use(express.json());
@@ -14,13 +14,13 @@ app.use(express.urlencoded({
 }))
 
 app.use((req, res, next) => {
-  res.set('Cache-Control', 'public,max-age=21600');
+  res.set('Cache-Control', 'public,max-age=31600');
   next()
 })
 // app.use(express.static(__dirname + '/public'))
 
 var allMeme = new Object();
-const rd45sdf = "site-home-stuff";
+
 app.set("view engine", "ejs");
 
 const redditScraperOptions = {
@@ -43,7 +43,6 @@ const scrapedata = async (SubReddit) => {
         this.urls = [];
       }
     }
-
     const obj = new Memeobj(SubReddit);
     obj.Info = await redditScraper.scrapeData(obj);
     obj.urls = await obj.Info.map((obj) => obj.data.url);
@@ -53,12 +52,12 @@ const scrapedata = async (SubReddit) => {
     console.log(err);
   }
 };
-
+/*
 (async () => {
   try {
     allMeme.memes = await scrapedata("memes");
     console.log("Memes Subreddit Scraped!");
-    /*
+    
      allMeme.dankmemes = await scrapedata("dankmemes");
      console.log("Dank_Memes Subreddit Scraped!");
 
@@ -67,23 +66,32 @@ const scrapedata = async (SubReddit) => {
      
      allMeme.MemeEconomy = await scrapedata("MemeEconomy");
      console.log("MemeEconomy Subreddit Scraped");
-     */
+     
     allMeme.all = [].concat.apply([], [...Object.values(allMeme)]);
     allMeme.home = JSON.stringify(allMeme.all);
-    cache.set(rd45sdf, allMeme.home);
-    console.log(allMeme.all.length + " total memes fetched.");
+    
+    cache.set(rd45sdf, allMeme.memes);
+    console.log(allMeme.memes.length + " total memes fetched.");
   } catch (error) {
     console.log(error);
   }
 })();
+*/
 
-
-app.get("/", function (req, res) {
-  const home = JSON.parse(cache.get(rd45sdf));
-  res.render("index", {
-    url: home
-
-  });
+app.get("/", async (req, res) => {
+  if (cache.has("memes")) {
+    const home = JSON.parse(cache.get("memes"));
+    return res.render("index", {
+      url: home
+    });
+  } else {
+    allMeme.memes = await scrapedata("memes");
+    console.log("Memes Subreddit Scraped!");
+    cache.set("memes", allMeme.memes);
+    return res.render("index", {
+      url: allMeme.memes
+    });
+  }
 });
 
 const set = async (req, res, next) => {
@@ -95,8 +103,6 @@ const set = async (req, res, next) => {
     cache.set(sub, urls);
     return res.render("index", {
       url: Urls
-
-
     });
   } catch (err) {
     console.log(err);
@@ -107,14 +113,15 @@ const set = async (req, res, next) => {
 
 const get = (req, res, next) => {
   const sub = req.params.id;
-  const content = cache.get(sub);
-  if (content) {
+  if (cache.has(sub)) {
+    const content = JSON.parse(cache.get(sub));
     return res.render("index", {
-      url: JSON.parse(content)
-
+      url: content
     });
-  }
-  return next();
+  } else {
+    return next();
+  };
+
 };
 
 app.get("/img/:id", get, set);

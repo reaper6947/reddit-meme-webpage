@@ -132,6 +132,12 @@ app.post("/", (req, res, next) => {
   next();
 });
 
+
+app.get('/google92507aebfb392b06.html', function (req, res) {
+  res.sendFile(__dirname + "/google92507aebfb392b06.html");
+})
+
+
 var port = process.env.PORT || 3000;
 app.listen(port, function () {
   console.log("server has started in " + port);

@@ -11,12 +11,12 @@ const cache = new NodeCache({
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
-}))
+}));
 
 app.use((req, res, next) => {
   res.set('Cache-Control', 'public,max-age=31600');
   next();
-})
+});
 // app.use(express.static(__dirname + '/public'))
 
 var allMeme = new Object();
@@ -85,12 +85,16 @@ app.get("/", async (req, res) => {
       url: home
     });
   }
-  allMeme.memes = await scrapedata("memes");
-  console.log("Memes Subreddit Scraped!");
-  cache.set("memes", allMeme.memes);
-  res.render("index", {
-    url: allMeme.memes
-  });
+  try {
+    allMeme.memes = await scrapedata("memes");
+    console.log("Memes Subreddit Scraped!");
+    cache.set("memes", allMeme.memes);
+    res.render("index", {
+      url: allMeme.memes
+    });
+  } catch (err) {
+    console.log(err);
+  };
 
 });
 

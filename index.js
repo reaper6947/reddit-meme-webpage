@@ -95,7 +95,7 @@ app.get("/", async (req, res) => {
   } catch (err) {
     console.log(err);
   };
-
+  next();
 });
 
 const set = async (req, res, next) => {

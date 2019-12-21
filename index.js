@@ -77,25 +77,35 @@ const scrapedata = async (SubReddit) => {
   }
 })();
 */
-
-app.get("/", async (req, res) => {
+/*
+const home = async (req, res, next) => {
   if (cache.has("memes")) {
-    const home = JSON.parse(cache.get("memes"));
+    const memes = cache.get("memes");
+    const home = JSON.parse(memes);
     return res.render("index", {
       url: home
     });
   }
+
   try {
     allMeme.memes = await scrapedata("memes");
     console.log("Memes Subreddit Scraped!");
     cache.set("memes", allMeme.memes);
-    res.render("index", {
+    return res.render("index", {
       url: allMeme.memes
     });
   } catch (err) {
     console.log(err);
-  };
-  next();
+  }
+  return next();
+};
+*/
+
+
+
+
+app.get("/", (req, res) => {
+  res.redirect("/img/memes")
 });
 
 const set = async (req, res, next) => {

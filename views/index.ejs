@@ -22,6 +22,7 @@
   </style>
 </head>
 
+
 <body class="bg-dark">
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <a class="navbar-brand" href="#">welcome to my meme site</a>
@@ -60,8 +61,8 @@
 
   <div class="container text-center bg-dark " style="padding:5px!important">
     <% for ( var i = 0 ; i < url.length; i++) {  %>
-    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="placeholder.png"
-      data-src="<%-url[i]%>" alt="memes">
+    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="placeholder.png" 
+      data-src="<%-url[i]%>" alt="memes" loading="lazy" >
     <% ; } %>
   </div>
   <script>

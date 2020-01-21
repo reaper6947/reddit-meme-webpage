@@ -29,7 +29,7 @@
 <body class="bg-dark">
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
 
-    <a class="navbar-brand" href="#">welcome to my meme site</a>
+    <a class="navbar-brand" href=""></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
       aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -54,11 +54,18 @@
             <a class="dropdown-item" href="https://meme911.herokuapp.com/img/DeepFriedMemes">DeepFriedMemes</a>
           </div>
         </li>
+        <li class='nav-item'>
+          <button class="btn btn-outline-dark my-2 my-sm-0" onclick="install()">
+            Add to home-screen
+          </button>
+        </li>
       </ul>
+
       <form class="form-inline my-2 my-lg-0" action="/" method="POST">
         <input class="form-control mr-sm-2" type="text" placeholder="search any subredit" name="id">
         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
       </form>
+
     </div>
   </nav>
 
@@ -90,7 +97,36 @@
       });
     });
   </script>
+  <script>
+    let deferredPrompt = null;
 
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      deferredPrompt = e;
+    });
+
+    async function install() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        console.log(deferredPrompt)
+        deferredPrompt.userChoice.then(function (choiceResult) {
+
+          if (choiceResult.outcome === 'accepted') {
+            console.log('Your PWA has been installed');
+          } else {
+            console.log('User chose to not install your PWA');
+          }
+
+          deferredPrompt = null;
+
+        });
+
+
+      }
+    }
+  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>

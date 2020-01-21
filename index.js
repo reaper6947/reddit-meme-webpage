@@ -30,7 +30,7 @@ const scrapedata = async (SubReddit) => {
   try {
     class Memeobj {
       constructor(Sub) {
-        this.Pages = 4;
+        this.Pages = 1;
         this.Records = 25;
         this.SortType = "top";
         this.SubReddit = Sub;

@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <meta name='theme-color' content="#00838f" />
   <meta name="google-site-verification" content="OHRHgTSZ8zPDzZuRQ5eNulgC45EUNkdmyg9oaPcfRZM" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
@@ -27,6 +28,7 @@
 
 <body class="bg-dark">
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+
     <a class="navbar-brand" href="#">welcome to my meme site</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
       aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
@@ -63,7 +65,8 @@
 
   <div class="container text-center bg-dark " style="padding:5px!important">
     <% for ( var i = 0 ; i < url.length; i++) {  %>
-    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="/images/icons/icon-384x384.png" data-src="<%-url[i]%>" alt="memes" loading="lazy">
+    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img"
+      src="/images/icons/icon-384x384.png" data-src="<%-url[i]%>" alt="memes" loading="lazy">
     <% ; } %>
   </div>
 

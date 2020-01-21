@@ -22,7 +22,7 @@ const redditScraperOptions = {
   AppId: process.env.API_ID, // enter the id here
   AppSecret: process.env.API_KEY // enter the secret here
 };
-// app.use(express.static(__dirname + '/public'))
+app.use(express.static(__dirname + '/views'))
 // var allMeme = new Object();
 const redditScraper = new RedditScraper.RedditScraper(redditScraperOptions);
 console.log("Configuration Loaded!");

@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel='manifest' href='../views/manifest.json'>
+  <link rel='manifest' href='/manifest.json'>
   <title>meme</title>
 
   <style>
@@ -62,8 +62,9 @@
 
   <div class="container text-center bg-dark " style="padding:5px!important">
     <% for ( var i = 0 ; i < url.length; i++) {  %>
-    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="/placeholder.png"
-      data-src="<%-url[i]%>" alt="memes" loading="lazy">
+    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="https://via.placeholder.com/360x360.png
+
+    C/O https://placeholder.com/" data-src="<%-url[i]%>" alt="memes" loading="lazy">
     <% ; } %>
   </div>
 

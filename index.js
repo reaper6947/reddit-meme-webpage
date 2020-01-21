@@ -7,6 +7,8 @@ const NodeCache = require("node-cache");
 const cache = new NodeCache({
   stdTTL: 31600
 });
+
+
 app.use(express.urlencoded({
   extended: true
 }))
@@ -29,14 +31,14 @@ const scrapedata = async (SubReddit) => {
   try {
     class Memeobj {
       constructor(Sub) {
-        this.Pages = 4;
+        this.Pages = 1;
         this.Records = 25;
         this.SortType = "top";
         this.SubReddit = Sub;
         /* this.Info = null; */
         /* this.urls = []; */
       }
-    };
+    }
     const obj = new Memeobj(SubReddit);
     const memeData = await redditScraper.scrapeData(obj);
     const memeUrls = await memeData.map(obj => obj.data.url);
@@ -82,7 +84,7 @@ const check = async (req, res, next) => {
       });
     } else {
       return next();
-    };
+    }
   } catch (err) {
     console.log('err in check')
   }
@@ -111,7 +113,7 @@ app.post("/", (req, res, next) => {
   next();
 });
 
-var port = process.env.PORT || 3000;
-app.listen(port, function() {
+var port = process.env.PORT || 5000;
+app.listen(port, function () {
   console.log("server has started in " + port);
 });

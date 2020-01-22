@@ -10,6 +10,9 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='manifest' href='/manifest.json'>
   <link rel="shortcut icon" href="/images/favicon.ico" />
+  // apple support
+  <link rel="apple-touch-icon" href="/images/brand.svg">
+  <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <title>meme</title>
 
   <style>
@@ -23,6 +26,8 @@
       padding-left: 5px;
     }
   </style>
+
+
 </head>
 
 
@@ -54,30 +59,28 @@
             <a class="dropdown-item" href="https://meme911.herokuapp.com/img/DeepFriedMemes">DeepFriedMemes</a>
           </div>
         </li>
-        <li class='nav-item'>
-          <button class="btn btn-outline-dark my-2 my-sm-0" onclick="install()">
-            Add to home-screen
-          </button>
-        </li>
       </ul>
-
       <form class="form-inline my-2 my-lg-0" action="/" method="POST">
         <input class="form-control mr-sm-2" type="text" placeholder="search any subredit" name="id">
         <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
       </form>
-
     </div>
   </nav>
-
-
   <div class="container text-center bg-dark " style="padding:5px!important">
     <% for ( var i = 0 ; i < url.length; i++) {  %>
-    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img"
-      src="/images/icons/icon-384x384.png" data-src="<%-url[i]%>" alt="memes" loading="lazy">
+    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="/images/brand.svg"
+      data-src="<%-url[i]%>" alt="memes" loading="lazy">
     <% ; } %>
   </div>
-
-
+  <script>
+    if (!navigator.serviceWorker.controller) {
+      navigator.serviceWorker.register("/sw.js", {
+        scope: "/"
+      }).then(function (reg) {
+        console.log("Service worker has been registered for scope: " + reg.scope);
+      });
+    }
+  </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const imageObserver = new IntersectionObserver((entries, imgObserver) => {
@@ -97,36 +100,7 @@
       });
     });
   </script>
-  <script>
-    let deferredPrompt = null;
 
-    window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
-      e.preventDefault();
-      // Stash the event so it can be triggered later.
-      deferredPrompt = e;
-    });
-
-    async function install() {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        console.log(deferredPrompt)
-        deferredPrompt.userChoice.then(function (choiceResult) {
-
-          if (choiceResult.outcome === 'accepted') {
-            console.log('Your PWA has been installed');
-          } else {
-            console.log('User chose to not install your PWA');
-          }
-
-          deferredPrompt = null;
-
-        });
-
-
-      }
-    }
-  </script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>
@@ -136,18 +110,6 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
   </script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-142476193-3"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag('js', new Date());
-    gtag('config', 'UA-142476193-3');
-  </script>
-
 </body>
 
 </html>

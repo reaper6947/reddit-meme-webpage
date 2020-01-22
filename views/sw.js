@@ -1,7 +1,7 @@
 const staticAssets = [
 
-    '../index.js',
-    // '../views/index.ejs'
+    /* '../index.js',*/
+    '../views/index.html'
 ];
 
 self.addEventListener('install', async event => {

@@ -1,11 +1,11 @@
 //jshint esversion:8
-const RedditScraper = require("reddit-scraper");
+const axios = require('axios');
 const express = require("express");
 const app = express();
 const dotenv = require("dotenv").config();
 const NodeCache = require("node-cache");
 const cache = new NodeCache({
-  stdTTL: 31600
+  stdTTL: 3600
 });
 
 app.use(express.urlencoded({
@@ -19,34 +19,17 @@ app.use((req, res, next) => {
 */
 app.set("view engine", "ejs");
 app.use(express.json());
-const redditScraperOptions = {
-  AppId: process.env.API_ID, // enter the id here
-  AppSecret: process.env.API_KEY // enter the secret here
-};
 app.use(express.static(__dirname + '/views'));
 // var allMeme = new Object();
-const redditScraper = new RedditScraper.RedditScraper(redditScraperOptions);
-console.log("Configuration Loaded!");
+
 
 const scrapedata = async (SubReddit) => {
   try {
-    class Memeobj {
-      constructor(Sub) {
-        this.Pages = 5;
-        this.Records = 25;
-        this.SortType = "top";
-        this.SubReddit = Sub;
-        /* this.Info = null; */
-        /* this.urls = []; */
-      }
-    }
-    const obj = new Memeobj(SubReddit);
-    const memeData = await redditScraper.scrapeData(obj);
-    const memeUrls = await memeData.map(obj => obj.data.url);
-    const imgUrl = memeUrls.filter(name => name.match(/\.(gif|jpeg|jpg|png)$/ig));
+    //const imgUrl = await axios.get(`https://reddit-zeit.now.sh/url/${SubReddit}`)
+    const imgUrl = axios.get(`https://reddit-zeit.now.sh/url/${SubReddit}`).then(resp => {return(resp.data);});
     return imgUrl;
   } catch (err) {
-    console.log('error in scrape');
+    console.log(err);
   }
 };
 

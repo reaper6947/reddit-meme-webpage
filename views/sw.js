@@ -43,9 +43,10 @@ async function networkFirst(request) {
 
 const CACHE = "pwabuilder-precache";
 const precacheFiles = [
-  "../views/index.html",
+  "../views/manifest.json",
   "../views/images/brand.svg",
-  "../views/images/favicon.ico"
+  "../views/images/favicon.ico",
+  "../views/index.html"
 ];
 
 self.addEventListener("install", function(event) {

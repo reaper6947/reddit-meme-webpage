@@ -41,7 +41,7 @@ async function networkFirst(request) {
 
 // This is the service worker with the Cache-first network
 
-const CACHE = "pwabuilder-precache";
+const CACHE = "myCache";
 const precacheFiles = [
   "/manifest.json",
   "/images/brand.svg",
@@ -66,7 +66,16 @@ self.addEventListener("install", function(event) {
 // Allow sw to control of current page
 self.addEventListener("activate", function(event) {
   console.log("[PWA Builder] Claiming clients for current page");
-  event.waitUntil(self.clients.claim());
+  var cacheKeeplist = [cacheName];
+    event.waitUntil(
+        caches.keys().then( keyList => {
+            return Promise.all(keyList.map( key => {
+                if (cacheKeeplist.indexOf(key) === -1) {
+                    return caches.delete(key);
+                }
+            }));
+        })
+.then(self.clients.claim())); //this line is important in some contexts
 });
 
 // If any fetch fails, it will look for the request in the cache and serve it from there first

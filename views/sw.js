@@ -46,7 +46,7 @@ const precacheFiles = [
   "/manifest.json",
   "/images/brand.svg",
   "/images/favicon.ico",
-  "/index.html"
+  "/index.ejs"
 ];
 
 self.addEventListener("install", function(event) {

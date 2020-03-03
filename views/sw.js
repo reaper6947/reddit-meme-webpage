@@ -26,19 +26,20 @@ self.addEventListener('activate', e => {
 .then(self.clients.claim())); //this line is important in some contexts
 });
 
+/*
 self.addEventListener('fetch', async e => {
   const req = e.request;
   const url = new URL(req.url);
 
-/*
+
   if (url.origin === location.origin) {
     e.respondWith(cacheFirst(req));
   } else {
     e.respondWith(networkAndCache(req));
   }
-*/
-});
 
+});
+*/
 
 /*
 async function cacheFirst(req) {

@@ -10,7 +10,6 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='manifest' href='/manifest.json'>
   <link rel="shortcut icon" href="/images/favicon.ico" />
-
   <link rel="apple-touch-icon" href="/images/brand.svg">
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <title>meme</title>
@@ -52,9 +51,9 @@
             Popular meme subreddits
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="https://meme911.herokuapp.com/img/dankmemes">dankmemes</a>
-            <a class="dropdown-item" href="https://meme911.herokuapp.com/img/MemeEconomy">MemeEconomy</a>
-            <a class="dropdown-item" href="https://meme911.herokuapp.com/img/DeepFriedMemes">DeepFriedMemes</a>
+            <a class="dropdown-item" href="/img/dankmemes">dankmemes</a>
+            <a class="dropdown-item" href="/img/MemeEconomy">MemeEconomy</a>
+            <a class="dropdown-item" href="/img/DeepFriedMemes">DeepFriedMemes</a>
           </div>
         </li>
       </ul>
@@ -81,6 +80,33 @@
       });
     }
   </script>
+   <script defer >
+     const images = document.querySelectorAll("[data-src]");
+function preloadImage(img) {
+  const src = img.getAttribute("data-src");
+  if (!src) {return;}
+  img.src = src;
+}
+
+const imgOptions = {
+  threshold: 0,
+  rootMargin: "0px 300px 500px 0px"
+};
+const imgObserver = new IntersectionObserver((entries, imgObserver) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) { return; }
+    else {
+      preloadImage(entry.target);
+      imgObserver.unobserve(entry.target);  
+    }
+  });
+}, imgOptions);
+
+images.forEach((image) => {
+  imgObserver.observe(image);
+});
+
+   </script>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const imageObserver = new IntersectionObserver((entries, imgObserver) => {

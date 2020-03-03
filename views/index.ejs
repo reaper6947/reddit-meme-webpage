@@ -107,25 +107,7 @@ images.forEach((image) => {
 });
 
    </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > 0) {
-            const lazyImage = entry.target
-            console.log("lazy loading ", lazyImage);
-            lazyImage.src = lazyImage.dataset.src;
-            lazyImage.classList.remove("lzy_img");
-            imgObserver.unobserve(lazyImage);
-          }
-        });
-      });
-      const arr = document.querySelectorAll('img.lzy_img');
-      arr.forEach((v) => {
-        imageObserver.observe(v);
-      });
-    });
-  </script>
+  
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
   </script>

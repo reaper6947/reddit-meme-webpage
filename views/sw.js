@@ -3,7 +3,8 @@ const staticAssets = [
   "/manifest.json",
   "/images/brand.svg",
   "/images/favicon.ico",
-  "/index.ejs"
+  "/index.ejs",
+  "/observers.js"
 ];
 
 self.addEventListener('install', async e => {

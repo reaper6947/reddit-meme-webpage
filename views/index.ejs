@@ -6,23 +6,25 @@
   <meta name='theme-color' content="#00838f" />
   <meta name="google-site-verification" content="OHRHgTSZ8zPDzZuRQ5eNulgC45EUNkdmyg9oaPcfRZM" />
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel='manifest' href='/manifest.json'>
   <link rel="shortcut icon" href="/images/favicon.ico" />
   <link rel="apple-touch-icon" href="/images/brand.svg">
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
   <title>meme</title>
 
   <style>
     .galleria {
       position: absolute;
       top: 58px;
-      bottom: 10px;
+      bottom: 5px;
       left: 5px;
       right: 5px;
-      display: block;
+      
 
     }
 
@@ -95,7 +97,8 @@
     (function () {
       Galleria.loadTheme("/js/themes/classic/galleria.classic.min.js");
       Galleria.run('.galleria', {
-        _toggleInfo: false,
+      
+        showInfo:false,
         preload: 4
       })
     }());

@@ -2,27 +2,34 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <meta name=”description” content=”find the latest memes straight from reddit without any hassel and much more.“>
   <meta name='theme-color' content="#00838f" />
   <meta name="google-site-verification" content="OHRHgTSZ8zPDzZuRQ5eNulgC45EUNkdmyg9oaPcfRZM" />
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel='manifest' href='/manifest.json'>
+    <link rel='manifest' href='/manifest.json'>
   <link rel="shortcut icon" href="/images/favicon.ico" />
   <link rel="apple-touch-icon" href="/images/brand.svg">
   <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
   <title>meme</title>
 
   <style>
-    img {
-      padding-top: 3%;
-      padding-bottom: 3%;
-    }
-
-    .container {
-      padding-right: 5px;
-      padding-left: 5px;
+    
+    .galleria {
+            position: absolute;
+            top: 58px;
+            bottom: 10px;
+            left: 5px;
+            right: 5px;
+            display: block;
+      
+        }
+    .navbar{
+      z-index:100;
+      margin:3px 5px 5px 5px;
+      border-radius: 3px;
     }
   </style>
 </head>
@@ -32,15 +39,15 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-info">
 
     <a class="navbar-brand" href="">Welcome</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
-      aria-controls="navbarColor02" aria-expanded="true" aria-label="Toggle navigation">
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarColor02"
+      aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="navbar-collapse collapse show" id="navbarColor02">
+    <div class="navbar-collapse collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/reaper6947/reddit-meme-webpage">contribute on github</a>
@@ -63,16 +70,16 @@
       </form>
     </div>
   </nav>
-  <div class="container text-center bg-dark " style="padding:5px!important">
-    <% for ( var i = 0 ; i < url.length; i++) {  %>
-    <img class=" text-center rounded img-fluid img-thumbnail border border-primary lzy_img" src="/images/brand.svg"
-      data-src="<%-url[i]%>" alt="memes" loading="lazy">
-    <% ; } %>
-  </div>
-  <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a
-      href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-  <script>
 
+  <div class=" bg-dark imgdiv">
+    <div class="galleria">
+      <% url.forEach( e => {  %>
+      <img src="<%-e%>" alt="memes" loading="auto">
+      <%  }); %>
+    </div>
+  </div>
+
+  <script>
     if (!navigator.serviceWorker.controller) {
       navigator.serviceWorker.register("/sw.js", {
         scope: "/"
@@ -80,29 +87,17 @@
         console.log("Service worker has been registered for scope: " + reg.scope);
       });
     }
-
   </script>
-  <script src="/observers.js" defer> </script>
-   <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      const imageObserver = new IntersectionObserver((entries, imgObserver) => {
-        entries.forEach((entry) => {
-          if (entry.intersectionRatio > 0) {
-            const lazyImage = entry.target
-            console.log("lazy loading ", lazyImage);
-            lazyImage.src = lazyImage.dataset.src;
-            lazyImage.classList.remove("lzy_img");
-            imgObserver.unobserve(lazyImage);
-          }
-        });
-      });
-      const arr = document.querySelectorAll('img.lzy_img');
-      arr.forEach((v) => {
-        imageObserver.observe(v);
-      });
-    });
-  
-  </script>
+  <script  src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+  <script  src="/js/galleria.min.js"></script>
+  <script >
+    (function () {
+        Galleria.loadTheme("/js/themes/classic/galleria.classic.min.js");
+        Galleria.run('.galleria',{
+          _toggleInfo: true
+        })
+    }());
+</script>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>

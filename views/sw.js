@@ -3,10 +3,11 @@ const staticAssets = [
   "/manifest.json",
   "/images/brand.svg",
   "/images/favicon.ico",
-    "/index.ejs",
     "/js/galleria.min.js",
     "/js/themes/classic/galleria.classic.css",
-    "/js/themes/classic/galleria.classic.min.js"
+    "/js/themes/classic/galleria.classic.min.js",
+    "/js/bootstrap.min.js"
+    
 ];
 
 self.addEventListener("install", async (e) => {

@@ -24,7 +24,7 @@
       bottom: 5px;
       left: 5px;
       right: 5px;
-      
+
 
     }
 
@@ -49,7 +49,7 @@
     <div class="navbar-collapse collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="/img/memes">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="https://github.com/reaper6947/reddit-meme-webpage">contribute on github</a>
@@ -80,7 +80,13 @@
       <%  }); %>
     </div>
   </div>
-
+  <script src="/lozad.js"></script>
+  <script>const observer = lozad('.lozad', {
+      rootMargin: '0px 0px 500px 700px', // syntax similar to that of CSS Margin
+      threshold: 0 // ratio of element convergence
+    });
+    observer.observe();
+  </script>
   <script>
     if (!navigator.serviceWorker.controller) {
       navigator.serviceWorker.register("/sw.js", {
@@ -92,13 +98,13 @@
   </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
   <script src="/js/galleria.min.js"></script>
-  
+
   <script>
     (function () {
       Galleria.loadTheme("/js/themes/classic/galleria.classic.min.js");
       Galleria.run('.galleria', {
-      
-        showInfo:false,
+
+        showInfo: false,
         preload: 4
       })
     }());

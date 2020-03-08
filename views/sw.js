@@ -7,7 +7,7 @@ const staticAssets = [
   "/js/themes/classic/galleria.classic.css",
   "/js/themes/classic/galleria.classic.min.js",
   "/js/bootstrap.min.js",
-  "/js/lozad"
+  "/js/lozad.js"
 ];
 
 self.addEventListener("install", async (e) => {

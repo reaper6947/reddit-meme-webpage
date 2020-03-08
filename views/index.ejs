@@ -76,17 +76,11 @@
   <div class=" bg-dark imgdiv">
     <div class="galleria">
       <% url.forEach( e => {  %>
-      <img src="<%-e%>" alt="memes" loading="auto">
+      <img src="<%-e%>" alt="memes" loading="auto"   >
       <%  }); %>
     </div>
   </div>
-  <script src="/lozad.js"></script>
-  <script>const observer = lozad('.lozad', {
-      rootMargin: '0px 0px 500px 700px', // syntax similar to that of CSS Margin
-      threshold: 0 // ratio of element convergence
-    });
-    observer.observe();
-  </script>
+  
   <script>
     if (!navigator.serviceWorker.controller) {
       navigator.serviceWorker.register("/sw.js", {
@@ -96,6 +90,7 @@
       });
     }
   </script>
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
   <script src="/js/galleria.min.js"></script>
 

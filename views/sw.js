@@ -6,8 +6,8 @@ const staticAssets = [
   "/js/galleria.min.js",
   "/js/themes/classic/galleria.classic.css",
   "/js/themes/classic/galleria.classic.min.js",
-  "/js/bootstrap.min.js",
-  "/js/lozad.js"
+  "/js/bootstrap.min.js"
+  
 ];
 
 self.addEventListener("install", async (e) => {
@@ -17,22 +17,12 @@ self.addEventListener("install", async (e) => {
   return self.skipWaiting();
 });
 
+
 self.addEventListener("activate", (e) => {
   console.log("Claiming clients for current page");
   var cacheKeeplist = [];
-  event.waitUntil(
-    caches
-      .keys()
-      .then((keyList) => {
-        return Promise.all(
-          keyList.map((key) => {
-            if (cacheKeeplist.indexOf(key) === -1) {
-              return caches.delete(key);
-            }
-          })
-        );
-      })
-      .then(self.clients.claim())
+  event.waitUntil(self.clients.claim()
+    
   ); //this line is important in some contexts
 });
 

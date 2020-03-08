@@ -209,3 +209,13 @@
 
   return lozad;
 });
+/*
+
+<script src="/lozad.js"></script>
+  <script>const observer = lozad('.lozad', {
+      rootMargin: '0px 0px 500px 700px', // syntax similar to that of CSS Margin
+      threshold: 0 // ratio of element convergence
+    });
+    observer.observe();
+  </script>
+  */

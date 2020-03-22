@@ -75,9 +75,9 @@
 
   <div class=" bg-dark imgdiv">
     <div class="galleria">
-      <% url.forEach( e => {  %>
-      <img src="<%-e%>" alt="memes" loading="auto"   >
-      <%  }); %>
+      <% for(let i = 0 ; i < img.imgUrl.length ; i++) {  %>
+      <img src="<%-img.imgUrl[i]%>" alt="memes" loading="auto" rel="<%-img.imgTitle[i]%>" data-description="<%-img.imgTitle[i]%>" >
+      <%  }; %>
     </div>
   </div>
   
@@ -98,9 +98,18 @@
     (function () {
       Galleria.loadTheme("/js/themes/classic/galleria.classic.min.js");
       Galleria.run('.galleria', {
-
-        showInfo: false,
-        preload: 4
+        _toggleInfo: true,
+        showInfo: true,
+        preload: 4,
+        dataConfig: function(img) {
+        // img is now the image element
+        // the function should return an object with the new data
+        return {
+            title: $(img).attr('rel'),
+            description: $(img).attr('data-description') // sets title to "John Doe"
+           // description: $(img).next('.desc').html() // sets description to "My picture"
+        };
+    }
       })
     }());
   </script>
